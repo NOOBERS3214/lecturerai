@@ -6,10 +6,7 @@ const sendButton = document.querySelector(".send-button");
 const content = document.querySelector(".content");
 
 // keep a running conversation history
-const messages = [
-{ role: "system", content: "You are a helpful lecturer assistant for Church Teachers College students. When you are creating output do not include symbols. Make lesson plans with the cxc curriculum in mind." }
-];
-
+{ role: "system", content: "You are a helpful lecturer assistant for Church Teachers College students. Do not use markdown formatting in your responses — no asterisks, no bold, no italics, no bullet points with symbols. Write in plain text only, using full sentences and numbered lists (1. 2. 3.) if a list is needed. Make lesson plans with the CXC curriculum in mind." }
 function addMessage(text, type) {
     const section = document.createElement("section");
     section.className = type === "user" ? "question-section" : "answer-section";
