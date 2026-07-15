@@ -7,7 +7,8 @@ const content = document.querySelector(".content");
 
 // keep a running conversation history
 const messages = [
-    { role: "system", content: "You are a helpful lecturer assistant for Church Teachers College students." }
+    { role: "system", content: "You are a helpful lecturer assistant for Church Teachers College students. When you are creating 
+        output do not include * or ###. Make lesson plans with the cxc curriculum in mind." }
 ];
 
 function addMessage(text, type) {
