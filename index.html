@@ -1,52 +1,378 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Teachers College ChatBot</title>
-
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Word Processing Challenge</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg1:#2a0f5c;--bg2:#4d2494;--panel:#ffffff;--text:#241245;--soft:#735f98;
+  --accent:#6d31d8;--accent-dark:#4b1f99;--green:#baf27b;
+}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;
+  background:radial-gradient(circle at top left,#8c59ff 0%,transparent 35%),
+             radial-gradient(circle at bottom right,#2ec4ff44 0%,transparent 25%),
+             linear-gradient(135deg,var(--bg1),var(--bg2) 55%,#241041);
+  min-height:100vh;
+}
+button{font:inherit;cursor:pointer}
+main{max-width:1100px;margin:auto;padding:28px 24px 38px}
+header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:24px}
+.brand{font-weight:950;font-size:24px;letter-spacing:-1px}.brand span{color:#ecd6ff}
+.pill{background:#ffffff16;border:1px solid #ffffff2c;border-radius:999px;padding:10px 18px;font-weight:850;backdrop-filter: blur(8px)}
+.panel{background:var(--panel);color:var(--text);border-radius:26px;padding:34px;box-shadow:0 22px 70px rgba(12,4,40,.38);text-align:center}
+.intro{padding:72px 34px;margin-top:38px}
+.eyebrow{font-size:13px;font-weight:900;letter-spacing:3px;color:#7c54b8;text-transform:uppercase}
+h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-3px;margin:20px 0}
+h2{font-size:clamp(24px,4vw,39px);line-height:1.2;margin:12px 0}
+.muted{color:var(--soft)}
+.primary,.secondary{border:0;border-radius:14px;padding:16px 28px;font-size:18px;font-weight:900}
+.primary{background:var(--accent);color:#fff;box-shadow:0 6px 0 var(--accent-dark)}
+.primary:hover{background:#7b42e4}
+.secondary{background:#f3ecff;color:var(--accent)}
+.secondary:hover{background:#ece1ff}
+.features{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:30px 0}
+.features span{background:#f3ebff;padding:12px 18px;border-radius:14px;font-weight:760;color:#4c297f}
+.progress{height:9px;background:#ffffff26;border-radius:999px;overflow:hidden;margin-bottom:20px}.progress div{height:100%;background:var(--green);transition:width .3s}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.question{min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:22px 0}
+.answer{min-height:112px;border:3px solid transparent;border-radius:18px;color:#fff;display:flex;align-items:center;gap:18px;text-align:left;padding:22px;font-size:clamp(17px,2.4vw,24px);font-weight:800;box-shadow:0 6px 0 #0004;transition:transform .12s,opacity .18s}
+.answer:hover:not(:disabled){transform:translateY(-3px)}
+.answer:disabled{cursor:default}
+.answer:nth-child(1){background:#e33158}.answer:nth-child(2){background:#1a6fe2}.answer:nth-child(3){background:#c08508}.answer:nth-child(4){background:#219552}
+.shape{font-size:31px;flex-shrink:0}.answer.selected{border-color:#fff;outline:3px solid #d8b9ff}.answer.dim{opacity:.35}.answer.correct{outline:4px solid #cbff8f;opacity:1}.answer.wrong{outline:4px solid #ffbac5}
+.feedback{background:#ffffffee;color:#291847;padding:20px 24px;border-radius:18px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}.feedback strong{font-size:22px}.feedback p{margin:6px 0 0}
+.feedback.celebrate{border:3px solid #b9f66d;background:#f5ffe9}
+.hidden{display:none!important}
+.scorebig{font-size:64px;font-weight:950;color:var(--accent);letter-spacing:-3px}
+.review{text-align:left;margin:24px 0}.review article{border-bottom:1px solid #ebdff9;padding:14px 0}.review p{margin:5px 0}
+footer{text-align:center;color:#ddcff5;font-size:13px;margin-top:28px}
+.interstitial-wrap{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;text-align:left}
+.monster-stage{flex:0 0 320px;background:linear-gradient(180deg,#f5eeff,#ede1ff);border-radius:28px;padding:22px;box-shadow:inset 0 0 0 2px #e5d3ff}
+.monster-card{flex:1 1 320px;min-width:280px}
+.big-encourage{font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-2px;margin:10px 0 14px;color:#3d2372}
+.sparkles{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.sparkles span{background:#efe4ff;color:#6330bf;border-radius:999px;padding:10px 14px;font-weight:800}
+.monster-note{font-size:18px;line-height:1.5;color:#5a4787;margin:0 0 22px}
+svg{display:block;width:100%;height:auto}
+.bounce{animation:bounce 1.8s infinite ease-in-out}.float{animation:float 2.6s infinite ease-in-out}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.confetti{position:fixed;top:-20px;pointer-events:none;z-index:10;width:10px;height:16px;border-radius:3px;animation:fall 1.2s ease-in forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(540deg);opacity:0}}
+@media(max-width:700px){main{padding:18px 12px}.panel{padding:24px 16px}.intro{padding:45px 20px}.answers{grid-template-columns:1fr}.answer{min-height:76px;padding:15px}.feedback{flex-direction:column;align-items:stretch}.brand{font-size:19px}.pill{padding:8px 12px}.monster-stage{flex-basis:100%}h1{letter-spacing:-2px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.confetti{display:none}}
+</style>
 </head>
-
 <body>
+<main>
+  <header>
+    <div class="brand">◆ WORD<span>QUEST</span></div>
+    <div class="pill" id="score">Score: 0</div>
+  </header>
 
-<main class="container">
-
-    <header class="header">
-      <h2 class="title">Lecturer AI</h2>
-     <h2>Made by Miguel Dennis</h2>
-    </header>
-
-    <div class="content">
-        <section class="answer-section">
-            Hello Student, how can I help you?
-        </section>
-
-        <section class="question-section">
-            Hello
-        </section>
+  <section id="start" class="panel intro">
+    <div class="eyebrow">Computer Studies • Classroom Challenge</div>
+    <h1>Word Processing<br>Challenge</h1>
+    <p class="muted">Test your knowledge of documents, tools and shortcuts in this colourful classroom quiz.</p>
+    <div class="features">
+      <span>🎉 10 questions</span>
+      <span>🌈 No timer pressure</span>
+      <span>⭐ Creature encouragement screens</span>
     </div>
+    <button class="primary" id="play">Start quiz →</button>
+  </section>
 
-    <footer class="chat-form">
-        <input
-            class="chat-input"
-            type="text"
-            placeholder="Type Prompt">
+  <section id="game" class="hidden">
+    <div class="progress"><div id="bar"></div></div>
+    <div class="meta">
+      <div class="pill" id="counter"></div>
+      <div class="pill" id="streak">★ Streak: 0</div>
+    </div>
+    <div class="panel question">
+      <div class="eyebrow" id="kind"></div>
+      <h2 id="prompt"></h2>
+    </div>
+    <div class="answers" id="answers"></div>
+    <button id="submit" class="primary hidden">Submit answers</button>
+    <div id="feedback" class="feedback hidden" aria-live="polite">
+      <div>
+        <strong id="verdict"></strong>
+        <p id="explanation"></p>
+      </div>
+      <button id="next" class="primary">Next →</button>
+    </div>
+  </section>
 
-        <button class="send-button">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="24"
-                 height="24"
-                 fill="currentColor"
-                 viewBox="0 0 24 24">
-                <path d="m21.41 11.09-18-8a1 1 0 0 0-1.09.19c-.29.28-.39.7-.25 1.08l2.87 7.65-2.87 7.65c-.14.38-.04.8.25 1.08a1 1 0 0 0 1.1.18l18-8a.998.998 0 0 0 0-1.82ZM4.78 18.12l1.23-3.27V15l6-3-6-3v.15L4.78 5.88 18.54 12z"/>
-            </svg>
-        </button>
-    </footer>
+  <section id="interstitial" class="panel hidden">
+    <div class="eyebrow">Creature cheer break</div>
+    <div class="interstitial-wrap">
+      <div class="monster-stage float" id="monsterVisual"></div>
+      <div class="monster-card">
+        <div class="sparkles"><span>✨ Positive reinforcement</span><span>💜 Keep learning</span></div>
+        <h1 class="big-encourage" id="cheerTitle"></h1>
+        <p class="monster-note" id="cheerText"></p>
+        <button class="primary" id="continueBtn">Continue to next question →</button>
+      </div>
+    </div>
+  </section>
 
+  <section id="end" class="panel hidden">
+    <div class="eyebrow">Challenge complete</div>
+    <h1 id="resultTitle">Great work!</h1>
+    <div class="scorebig" id="finalScore"></div>
+    <p id="accuracy"></p>
+    <p class="muted">You completed the entire challenge. Keep building your Computer Studies skills one question at a time.</p>
+    <button class="primary" id="restart">Play again ↻</button>
+    <button class="secondary" id="toggleReview">Review answers</button>
+    <div id="review" class="review hidden"></div>
+  </section>
+
+  <footer>Word Processing • Computer Studies</footer>
 </main>
 
+<script>
+const questions=[
+{q:'What is word processing?',a:['Creating and managing databases','Creating and editing text documents','Creating electronic spreadsheets','Creating computer programs'],c:[1],e:'Word processing involves creating, editing and formatting text documents.'},
+{q:'Which of these are word processing programs?',a:['Microsoft Word','Microsoft Excel','Google Docs','LibreOffice Writer'],c:[0,2,3],e:'Microsoft Word, Google Docs and LibreOffice Writer are word processors. Excel is a spreadsheet program.'},
+{q:'A student changes the colour and size of a heading. What is this called?',a:['Editing','Saving','Printing','Formatting'],c:[3],e:'Formatting changes the appearance of a document.'},
+{q:'What is the blinking line that shows where text will appear?',a:['Cursor','Ruler','Scroll bar','Status bar'],c:[0],e:'The cursor indicates the insertion point for text.'},
+{q:'A footer appears at the top of a document page.',a:['True','False'],c:[1],e:'A footer appears at the bottom of a page. A header appears at the top.'},
+{q:'Which part of the word processing window displays the document’s name?',a:['Status bar','Ribbon','Title bar','Quick Access Toolbar'],c:[2],e:'The title bar displays the document’s name.'},
+{q:'What is the blank space around the edges of a page called?',a:['Alignment','Margin','Font size','Work area'],c:[1],e:'Margins are the blank spaces around the edges of a page.'},
+{q:'Which keyboard shortcut saves a document?',a:['Ctrl + P','Ctrl + O','Ctrl + Z','Ctrl + S'],c:[3],e:'Ctrl + S saves the current document.'},
+{q:'Print preview allows users to see how a document will look before printing.',a:['True','False'],c:[0],e:'Print preview displays the expected printed layout before paper is used.'},
+{q:'A student wants to continue working on an existing document. Which command should they select?',a:['File → Open','File → New','File → Print','File → Save As'],c:[0],e:'The Open command retrieves an existing document.'}
+];
+
+const monsterSVGs=[
+`<svg viewBox="0 0 320 300" aria-hidden="true">
+  <g class="bounce">
+    <ellipse cx="160" cy="255" rx="82" ry="16" fill="#d9c7ff"/>
+    <g>
+      <path d="M95 70 L68 18 L119 48" fill="#ffd44d" stroke="#7a5310" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M225 70 L252 18 L201 48" fill="#ffd44d" stroke="#7a5310" stroke-width="6" stroke-linejoin="round"/>
+      <ellipse cx="160" cy="150" rx="88" ry="84" fill="#ffd44d" stroke="#7a5310" stroke-width="6"/>
+      <ellipse cx="128" cy="143" rx="18" ry="21" fill="#222"/>
+      <ellipse cx="193" cy="143" rx="18" ry="21" fill="#222"/>
+      <circle cx="121" cy="136" r="5" fill="#fff"/>
+      <circle cx="186" cy="136" r="5" fill="#fff"/>
+      <circle cx="105" cy="173" r="13" fill="#ff8da5"/>
+      <circle cx="215" cy="173" r="13" fill="#ff8da5"/>
+      <path d="M146 173 Q160 187 174 173" stroke="#6c3500" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M123 214 Q133 244 150 225" stroke="#7a5310" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M197 214 Q187 244 170 225" stroke="#7a5310" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>`,
+`<svg viewBox="0 0 320 300" aria-hidden="true">
+  <g class="bounce">
+    <ellipse cx="160" cy="255" rx="82" ry="16" fill="#d9c7ff"/>
+    <g>
+      <path d="M160 45 C150 25 136 14 118 10 C129 30 132 46 130 63" fill="#64d85f" stroke="#247027" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M160 44 C172 24 190 13 208 12 C198 31 194 46 195 63" fill="#64d85f" stroke="#247027" stroke-width="6" stroke-linejoin="round"/>
+      <ellipse cx="160" cy="155" rx="88" ry="84" fill="#8ff084" stroke="#247027" stroke-width="6"/>
+      <ellipse cx="127" cy="145" rx="18" ry="21" fill="#222"/>
+      <ellipse cx="192" cy="145" rx="18" ry="21" fill="#222"/>
+      <circle cx="120" cy="138" r="5" fill="#fff"/>
+      <circle cx="185" cy="138" r="5" fill="#fff"/>
+      <ellipse cx="111" cy="174" rx="13" ry="10" fill="#ff9eba"/>
+      <ellipse cx="209" cy="174" rx="13" ry="10" fill="#ff9eba"/>
+      <path d="M145 177 Q160 191 175 177" stroke="#255228" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M112 214 Q132 235 147 220" stroke="#247027" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M208 214 Q188 235 173 220" stroke="#247027" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>`,
+`<svg viewBox="0 0 320 300" aria-hidden="true">
+  <g class="bounce">
+    <ellipse cx="160" cy="255" rx="82" ry="16" fill="#d9c7ff"/>
+    <g>
+      <path d="M98 94 C84 68 87 39 112 31 C116 55 127 70 145 81" fill="#60b9ff" stroke="#145a9a" stroke-width="6"/>
+      <path d="M223 93 C236 67 233 38 208 31 C204 55 193 70 175 81" fill="#60b9ff" stroke="#145a9a" stroke-width="6"/>
+      <ellipse cx="160" cy="155" rx="88" ry="84" fill="#8dd5ff" stroke="#145a9a" stroke-width="6"/>
+      <ellipse cx="128" cy="145" rx="18" ry="21" fill="#222"/>
+      <ellipse cx="193" cy="145" rx="18" ry="21" fill="#222"/>
+      <circle cx="121" cy="138" r="5" fill="#fff"/>
+      <circle cx="186" cy="138" r="5" fill="#fff"/>
+      <circle cx="109" cy="174" r="13" fill="#ff9fbb"/>
+      <circle cx="211" cy="174" r="13" fill="#ff9fbb"/>
+      <path d="M147 177 Q160 171 173 177" stroke="#124e84" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M125 215 Q136 242 152 224" stroke="#145a9a" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M195 215 Q184 242 168 224" stroke="#145a9a" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>`,
+`<svg viewBox="0 0 320 300" aria-hidden="true">
+  <g class="bounce">
+    <ellipse cx="160" cy="255" rx="82" ry="16" fill="#d9c7ff"/>
+    <g>
+      <path d="M129 75 C115 55 112 30 125 16 C138 33 149 49 154 66" fill="#ff9240" stroke="#9e4500" stroke-width="6"/>
+      <path d="M190 75 C204 55 207 30 194 16 C181 33 170 49 165 66" fill="#ff9240" stroke="#9e4500" stroke-width="6"/>
+      <ellipse cx="160" cy="155" rx="88" ry="84" fill="#ffb25d" stroke="#9e4500" stroke-width="6"/>
+      <ellipse cx="128" cy="145" rx="18" ry="21" fill="#222"/>
+      <ellipse cx="193" cy="145" rx="18" ry="21" fill="#222"/>
+      <circle cx="121" cy="138" r="5" fill="#fff"/>
+      <circle cx="186" cy="138" r="5" fill="#fff"/>
+      <ellipse cx="111" cy="174" rx="13" ry="10" fill="#ff9eba"/>
+      <ellipse cx="209" cy="174" rx="13" ry="10" fill="#ff9eba"/>
+      <path d="M145 177 Q160 194 175 177" stroke="#7a2f00" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M123 214 Q133 244 150 225" stroke="#9e4500" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M197 214 Q187 244 170 225" stroke="#9e4500" stroke-width="8" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>`
+];
+
+const cheerGood=[
+  {title:'Good job!',text:'Your creature pal is cheering you on. You are doing a great job building your word processing knowledge.'},
+  {title:'Excellent work!',text:'That was strong thinking. Keep going and show what you know on the next question.'},
+  {title:'Awesome effort!',text:'Your hard work is showing. Stay focused and keep your momentum going.'},
+  {title:'Brilliant!',text:'You are making excellent progress. Let’s head into the next challenge.'}
+];
+const cheerTry=[
+  {title:'Nice try!',text:'Learning takes practice. Your creature pal says keep going and use the feedback to help you.'},
+  {title:'Keep it up!',text:'Mistakes help us grow. Take a breath, believe in yourself and try the next one.'},
+  {title:'You’ve got this!',text:'Every question is a chance to improve. Your creature pal is still cheering for you.'},
+  {title:'Good effort!',text:'Do not give up. Read carefully and go again with confidence on the next question.'}
+];
+
+const shapes=['▲','◆','●','■'];
+const $=id=>document.getElementById(id);
+const show=(id,on)=>$(id).classList.toggle('hidden',!on);
+let index=0,score=0,correct=0,selected=[],locked=false,streak=0,history=[],lastAnswerCorrect=false;
+
+function begin(){
+  index=score=correct=streak=0;selected=[];locked=false;history=[];lastAnswerCorrect=false;
+  $('score').textContent='Score: 0';$('streak').textContent='★ Streak: 0';
+  show('start',false);show('end',false);show('review',false);show('interstitial',false);show('game',true);
+  $('toggleReview').textContent='Review answers';
+  render();
+}
+
+function render(){
+  selected=[];locked=false;
+  const q=questions[index];
+  $('counter').textContent=`Question ${index+1} / ${questions.length}`;
+  $('bar').style.width=`${(index+1)/questions.length*100}%`;
+  $('kind').textContent=q.c.length>1?'Select all correct answers':q.a.length===2?'True or false':'Choose one answer';
+  $('prompt').textContent=q.q;
+  show('feedback',false);
+  show('submit',q.c.length>1);
+  $('submit').disabled=true;
+  $('answers').replaceChildren();
+  q.a.forEach((a,i)=>{
+    const b=document.createElement('button');
+    b.className='answer';
+    const shape=document.createElement('span');shape.className='shape';shape.textContent=shapes[i]||'•';
+    const label=document.createElement('span');label.textContent=a;
+    b.append(shape,label);
+    b.setAttribute('aria-pressed','false');
+    b.onclick=()=>choose(i);
+    $('answers').append(b);
+  });
+}
+
+function choose(i){
+  if(locked)return;
+  if(questions[index].c.length===1){selected=[i];finish();}
+  else{
+    selected=selected.includes(i)?selected.filter(x=>x!==i):[...selected,i];
+    [...$('answers').children].forEach((b,j)=>{
+      b.classList.toggle('selected',selected.includes(j));
+      b.setAttribute('aria-pressed',selected.includes(j));
+    });
+    $('submit').disabled=!selected.length;
+  }
+}
+
+function finish(){
+  if(locked)return;
+  locked=true;
+  const q=questions[index];
+  const ok=selected.length===q.c.length && q.c.every(i=>selected.includes(i));
+  lastAnswerCorrect=ok;
+  const points=ok?1000:0;
+  score+=points;
+  if(ok){correct++;streak++;celebrate();}else{streak=0;}
+  history.push({q,selected:[...selected],ok});
+  $('score').textContent=`Score: ${score.toLocaleString()}`;
+  $('streak').textContent=`★ Streak: ${streak}`;
+  [...$('answers').children].forEach((b,i)=>{
+    b.disabled=true;
+    b.classList.remove('selected');
+    b.classList.toggle('correct',q.c.includes(i));
+    b.classList.toggle('wrong',selected.includes(i)&&!q.c.includes(i));
+    b.classList.toggle('dim',!q.c.includes(i)&&!selected.includes(i));
+  });
+  const praise=['Excellent work!','Fantastic thinking!','You nailed it!','Brilliant effort!','Well done!'];
+  const support=['Good effort! Every mistake is a chance to learn.','Keep going! You are building your knowledge.','Nice try! Use this feedback to grow.'];
+  $('verdict').textContent=ok?`🌟 ${streak>=3?streak+' correct in a row!':praise[index%praise.length]} +${points.toLocaleString()} points`:`💪 ${support[index%support.length]}`;
+  $('feedback').classList.toggle('celebrate',ok);
+  $('explanation').textContent=q.e;
+  $('next').textContent=index===questions.length-1?'See results →':'Creature cheer screen →';
+  show('feedback',true);
+}
+
+function showInterstitial(){
+  const data=(lastAnswerCorrect?cheerGood:cheerTry)[index % 4];
+  $('cheerTitle').textContent=data.title;
+  $('cheerText').textContent=data.text;
+  $('monsterVisual').innerHTML=monsterSVGs[index % monsterSVGs.length];
+  show('game',false);
+  show('interstitial',true);
+}
+
+function moveOn(){
+  if(++index<questions.length){show('interstitial',false);show('game',true);render();}
+  else{finishQuiz();}
+}
+
+function nextStep(){
+  if(!locked)return;
+  if(index===questions.length-1){finishQuiz();}
+  else{showInterstitial();}
+}
+
+function finishQuiz(){
+  show('game',false);show('interstitial',false);show('end',true);
+  $('resultTitle').textContent=correct===questions.length?'🏆 Outstanding! Perfect score!':correct>=7?'🌟 Great work! Keep shining!':'💪 Well done for completing the challenge!';
+  $('finalScore').textContent=score.toLocaleString()+' pts';
+  $('accuracy').textContent=`${correct} of ${questions.length} correct • ${correct*10}% accuracy`;
+  $('review').replaceChildren();
+  history.forEach((h,i)=>{
+    const a=document.createElement('article'),t=document.createElement('strong'),p=document.createElement('p'),s=document.createElement('p');
+    t.textContent=`${h.ok?'✓':'✗'} ${i+1}. ${h.q.q}`;
+    p.textContent='Your answer: '+(h.selected.map(j=>h.q.a[j]).join(', ')||'No answer');
+    s.textContent='Correct answer: '+h.q.c.map(j=>h.q.a[j]).join(', ');
+    a.append(t,p,s);$('review').append(a);
+  });
+}
+
+function celebrate(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  for(let i=0;i<28;i++){
+    const c=document.createElement('span');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=['#ffcf40','#ff547e','#8cf26c','#a98aff','#4ed9ff'][i%5];
+    c.style.animationDelay=Math.random()*.25+'s';
+    document.body.append(c);
+    setTimeout(()=>c.remove(),1600);
+  }
+}
+
+$('play').onclick=begin;
+$('restart').onclick=begin;
+$('submit').onclick=finish;
+$('next').onclick=nextStep;
+$('continueBtn').onclick=moveOn;
+$('toggleReview').onclick=()=>{
+  const on=$('review').classList.contains('hidden');
+  show('review',on);
+  $('toggleReview').textContent=on?'Hide answers':'Review answers';
+};
+</script>
 </body>
 </html>
