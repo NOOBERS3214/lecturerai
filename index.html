@@ -77,7 +77,7 @@ svg{display:block;width:100%;height:auto}
     <h1>Word Processing<br>Challenge</h1>
     <p class="muted">Test your knowledge of documents, tools and shortcuts in this colourful classroom quiz.</p>
     <div class="features">
-      <span>🎉 10 questions</span>
+      <span>🎉 24 questions</span>
       <span>🌈 No timer pressure</span>
       <span>⭐ Creature encouragement screens</span>
     </div>
@@ -134,16 +134,316 @@ svg{display:block;width:100%;height:auto}
 
 <script>
 const questions=[
-{q:'What is word processing?',a:['Creating and managing databases','Creating and editing text documents','Creating electronic spreadsheets','Creating computer programs'],c:[1],e:'Word processing involves creating, editing and formatting text documents.'},
-{q:'Which of these are word processing programs?',a:['Microsoft Word','Microsoft Excel','Google Docs','LibreOffice Writer'],c:[0,2,3],e:'Microsoft Word, Google Docs and LibreOffice Writer are word processors. Excel is a spreadsheet program.'},
-{q:'A student changes the colour and size of a heading. What is this called?',a:['Editing','Saving','Printing','Formatting'],c:[3],e:'Formatting changes the appearance of a document.'},
-{q:'What is the blinking line that shows where text will appear?',a:['Cursor','Ruler','Scroll bar','Status bar'],c:[0],e:'The cursor indicates the insertion point for text.'},
-{q:'A footer appears at the top of a document page.',a:['True','False'],c:[1],e:'A footer appears at the bottom of a page. A header appears at the top.'},
-{q:'Which part of the word processing window displays the document’s name?',a:['Status bar','Ribbon','Title bar','Quick Access Toolbar'],c:[2],e:'The title bar displays the document’s name.'},
-{q:'What is the blank space around the edges of a page called?',a:['Alignment','Margin','Font size','Work area'],c:[1],e:'Margins are the blank spaces around the edges of a page.'},
-{q:'Which keyboard shortcut saves a document?',a:['Ctrl + P','Ctrl + O','Ctrl + Z','Ctrl + S'],c:[3],e:'Ctrl + S saves the current document.'},
-{q:'Print preview allows users to see how a document will look before printing.',a:['True','False'],c:[0],e:'Print preview displays the expected printed layout before paper is used.'},
-{q:'A student wants to continue working on an existing document. Which command should they select?',a:['File → Open','File → New','File → Print','File → Save As'],c:[0],e:'The Open command retrieves an existing document.'}
+  {
+    "q": "What is word processing?",
+    "a": [
+      "Creating and managing databases",
+      "Creating, editing, formatting, saving and printing text documents",
+      "Creating electronic spreadsheets",
+      "Writing computer programs"
+    ],
+    "c": [
+      1
+    ],
+    "e": "Word processing uses a computer program to create, edit, format, save and print text documents."
+  },
+  {
+    "q": "Which of these are word processing programs?",
+    "a": [
+      "Microsoft Word",
+      "Microsoft Excel",
+      "Google Docs",
+      "LibreOffice Writer"
+    ],
+    "c": [
+      0,
+      2,
+      3
+    ],
+    "e": "Microsoft Word, Google Docs and LibreOffice Writer are word processors. Apple Pages is another example."
+  },
+  {
+    "q": "A student changes the colour and size of a heading. What is this called?",
+    "a": [
+      "Editing",
+      "Saving",
+      "Printing",
+      "Formatting"
+    ],
+    "c": [
+      3
+    ],
+    "e": "Formatting changes the appearance of a document."
+  },
+  {
+    "q": "What is the blinking line that shows where text will appear?",
+    "a": [
+      "Cursor",
+      "Ruler",
+      "Scroll bar",
+      "Status bar"
+    ],
+    "c": [
+      0
+    ],
+    "e": "The cursor shows where text will appear."
+  },
+  {
+    "q": "A footer appears at the top of a document page.",
+    "a": [
+      "True",
+      "False"
+    ],
+    "c": [
+      1
+    ],
+    "e": "A footer appears at the bottom of a page."
+  },
+  {
+    "q": "Which part of the word processing window displays the document’s name?",
+    "a": [
+      "Status bar",
+      "Ribbon",
+      "Title bar",
+      "Quick Access Toolbar"
+    ],
+    "c": [
+      2
+    ],
+    "e": "The title bar displays the document’s name."
+  },
+  {
+    "q": "What is the blank space around the edges of a page called?",
+    "a": [
+      "Alignment",
+      "Margin",
+      "Font size",
+      "Work area"
+    ],
+    "c": [
+      1
+    ],
+    "e": "A margin is the blank space around the edge of a page."
+  },
+  {
+    "q": "Which keyboard shortcut saves a document?",
+    "a": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + Z",
+      "Ctrl + S"
+    ],
+    "c": [
+      3
+    ],
+    "e": "Ctrl + S saves the document."
+  },
+  {
+    "q": "Print preview allows users to see how a document will look before printing.",
+    "a": [
+      "True",
+      "False"
+    ],
+    "c": [
+      0
+    ],
+    "e": "Print preview shows the expected printed layout."
+  },
+  {
+    "q": "A student wants to continue working on an existing document. Which command should they select?",
+    "a": [
+      "File → Open",
+      "File → New",
+      "File → Print",
+      "File → Save As"
+    ],
+    "c": [
+      0
+    ],
+    "e": "Open retrieves an existing document."
+  },
+  {
+    "q": "What is a document?",
+    "a": [
+      "A temporary storage area",
+      "A style of lettering",
+      "A file containing text and other content",
+      "A collection of folders"
+    ],
+    "c": [
+      2
+    ],
+    "e": "A document is a file containing text and other content."
+  },
+  {
+    "q": "What is text?",
+    "a": [
+      "Letters, words and sentences you type",
+      "The blank space around a page",
+      "The name of a saved file",
+      "The design of letters"
+    ],
+    "c": [
+      0
+    ],
+    "e": "Text consists of letters, words and sentences you type."
+  },
+  {
+    "q": "What is a character?",
+    "a": [
+      "An entire paragraph",
+      "A complete document",
+      "A group of sentences",
+      "One letter, number, symbol or space"
+    ],
+    "c": [
+      3
+    ],
+    "e": "A character is one letter, number, symbol or space."
+  },
+  {
+    "q": "What is a font?",
+    "a": [
+      "The position of text",
+      "The design or style of letters",
+      "The name of a document",
+      "The space around a page"
+    ],
+    "c": [
+      1
+    ],
+    "e": "Font refers to the design or style of the letters."
+  },
+  {
+    "q": "What is alignment?",
+    "a": [
+      "The size of letters",
+      "The storage of copied text",
+      "How text sits: left, centre, right or justified",
+      "The naming of a file"
+    ],
+    "c": [
+      2
+    ],
+    "e": "Alignment describes how text sits on a page."
+  },
+  {
+    "q": "What is the clipboard?",
+    "a": [
+      "Temporary storage for cut or copied content",
+      "A place to organise saved files",
+      "A tool for setting margins",
+      "A section at the top of a page"
+    ],
+    "c": [
+      0
+    ],
+    "e": "The clipboard temporarily stores cut or copied content."
+  },
+  {
+    "q": "What does it mean to select text?",
+    "a": [
+      "Save it in a folder",
+      "Print the entire page",
+      "Change its font automatically",
+      "Highlight it before changing or moving it"
+    ],
+    "c": [
+      3
+    ],
+    "e": "Selecting means highlighting text before changing or moving it."
+  },
+  {
+    "q": "What is a header?",
+    "a": [
+      "Repeated content at the bottom of a page",
+      "Repeated content at the top of a page",
+      "The blank space around the page",
+      "The name used to identify a file"
+    ],
+    "c": [
+      1
+    ],
+    "e": "A header is repeated content at the top of a page."
+  },
+  {
+    "q": "What is a file name?",
+    "a": [
+      "A place used to organise files",
+      "The style of a document’s text",
+      "The name used to identify a saved document",
+      "A temporary copy of selected text"
+    ],
+    "c": [
+      2
+    ],
+    "e": "A file name identifies a saved document."
+  },
+  {
+    "q": "What is a folder?",
+    "a": [
+      "A place used to organise files",
+      "A tool that aligns text",
+      "A style of lettering",
+      "A repeated section of a page"
+    ],
+    "c": [
+      0
+    ],
+    "e": "A folder is a place used to organise files."
+  },
+  {
+    "q": "Which option lists four advantages of word processing?",
+    "a": [
+      "Faster changes, neater work, easy reuse and slower storage",
+      "Neater work, safer storage, harder reuse and slower changes",
+      "Faster changes, harder reuse, neater work and safer storage",
+      "Faster changes, neater work, easy reuse and safer storage"
+    ],
+    "c": [
+      3
+    ],
+    "e": "The four advantages are faster changes, neater work, easy reuse and safer storage."
+  },
+  {
+    "q": "Which word processor is described as free and open-source?",
+    "a": [
+      "Apple Pages",
+      "LibreOffice Writer",
+      "Microsoft Word",
+      "Google Docs"
+    ],
+    "c": [
+      1
+    ],
+    "e": "LibreOffice Writer is free and open-source."
+  },
+  {
+    "q": "Which word processor is highlighted for live cloud collaboration?",
+    "a": [
+      "LibreOffice Writer",
+      "Apple Pages",
+      "Google Docs",
+      "Microsoft Word"
+    ],
+    "c": [
+      2
+    ],
+    "e": "Google Docs is highlighted for live cloud collaboration."
+  },
+  {
+    "q": "Which word processor is highlighted for visual, simple page design?",
+    "a": [
+      "Apple Pages",
+      "Google Docs",
+      "LibreOffice Writer",
+      "Microsoft Word"
+    ],
+    "c": [
+      0
+    ],
+    "e": "Apple Pages is highlighted for visual, simple page design."
+  }
 ];
 
 const monsterSVGs=[
@@ -233,7 +533,7 @@ const cheerGood=[
 ];
 const cheerTry=[
   {title:'Nice try!',text:'Learning takes practice. Your creature pal says keep going and use the feedback to help you.'},
-  {title:'Keep it up!',text:'Mistakes help us grow. Take a breath, believe in yourself and try the next one.'},
+  {title:'Keep it up!',text:'Mistakes help us grow. Believe in yourself and try the next one.'},
   {title:'You’ve got this!',text:'Every question is a chance to improve. Your creature pal is still cheering for you.'},
   {title:'Good effort!',text:'Do not give up. Read carefully and go again with confidence on the next question.'}
 ];
@@ -311,7 +611,7 @@ function finish(){
   $('verdict').textContent=ok?`🌟 ${streak>=3?streak+' correct in a row!':praise[index%praise.length]} +${points.toLocaleString()} points`:`💪 ${support[index%support.length]}`;
   $('feedback').classList.toggle('celebrate',ok);
   $('explanation').textContent=q.e;
-  $('next').textContent=index===questions.length-1?'See results →':'Creature cheer screen →';
+  $('next').textContent=index===questions.length-1?'See results →':'Meet your creature pal →';
   show('feedback',true);
 }
 
@@ -337,9 +637,9 @@ function nextStep(){
 
 function finishQuiz(){
   show('game',false);show('interstitial',false);show('end',true);
-  $('resultTitle').textContent=correct===questions.length?'🏆 Outstanding! Perfect score!':correct>=7?'🌟 Great work! Keep shining!':'💪 Well done for completing the challenge!';
+  $('resultTitle').textContent=correct===questions.length?'🏆 Outstanding! Perfect score!':correct/questions.length>=0.7?'🌟 Great work! Keep shining!':'💪 Well done for completing the challenge!';
   $('finalScore').textContent=score.toLocaleString()+' pts';
-  $('accuracy').textContent=`${correct} of ${questions.length} correct • ${correct*10}% accuracy`;
+  $('accuracy').textContent=`${correct} of ${questions.length} correct • ${Math.round(correct/questions.length*100)}% accuracy`;
   $('review').replaceChildren();
   history.forEach((h,i)=>{
     const a=document.createElement('article'),t=document.createElement('strong'),p=document.createElement('p'),s=document.createElement('p');
@@ -376,3 +676,4 @@ $('toggleReview').onclick=()=>{
 </script>
 </body>
 </html>
+
